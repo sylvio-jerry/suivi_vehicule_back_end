@@ -1,0 +1,40 @@
+###
+GET http://localhost:5000/api/agent
+
+###
+GET http://localhost:5000/api/agent/new_numero
+
+###
+GET http://localhost:5000/api/agent/4
+
+
+###
+POST http://localhost:5000/api/agent
+Content-Type: application/json
+
+{
+    "matricule": "1252",
+    "nom": "agent_4",
+    "prenom": null,
+    "tel":null,
+    "adresse":"ddzdz",
+    "role":"chauffeur"
+}
+
+###
+PUT http://localhost:5000/api/agent/4
+Content-Type: application/json
+
+
+{
+    "matricule": "zaza42",
+    "nom": "agent_42",
+    "prenom": "yes",
+    "tel":"0348596582",
+    "adresse":"ddzdz",
+    "role":"driver expertise"
+}
+
+
+###
+DELETE http://localhost:5000/api/agent/13

@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model utilisateur {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique(map: "email_user") @db.VarChar(75)
+  password String  @db.VarChar(255)
+  is_admin Boolean @default(false)
+  agent_id Int     @unique(map: "agent_id")
+  fcav     fcav[]
+  fst      fst[]
+  agent    agent   @relation(fields: [agent_id], references: [id], onDelete: Cascade, map: "fk_agent_utilisateur")
+}
+
+model navire {
+  id           Int        @id @default(autoincrement())
+  matricule    String     @unique(map: "matricule") @db.VarChar(10)
+  nom_navire   String     @db.VarChar(75)
+  type_navire  String     @db.VarChar(50)
+  compagnie_id Int
+  escale       escale[]
+  compagnie    compagnie  @relation(fields: [compagnie_id], references: [id], onDelete: Cascade, map: "fk_navire_compagnie")
+  vehicule     vehicule[]
+
+  @@index([compagnie_id], map: "fk_navire_compagnie")
+}
+
+model agent {
+  id          Int          @id @default(autoincrement())
+  matricule   String       @unique(map: "matricule_agent") @db.VarChar(10)
+  nom         String       @db.VarChar(50)
+  prenom      String?      @db.VarChar(50)
+  tel         String?      @db.VarChar(10)
+  adresse     String       @db.VarChar(75)
+  role        String       @db.VarChar(20)
+  fst         fst[]
+  utilisateur utilisateur?
+}
+
+model compagnie {
+  id            Int      @id @default(autoincrement())
+  nom_compagnie String   @db.VarChar(75)
+  navire        navire[]
+}
+
+model fcav {
+  id                   Int          @id @default(autoincrement())
+  nombre_cle           Int
+  km_compteur          Int
+  plaque_numeralogique String       @unique(map: "plaque_numeralogique") @db.VarChar(20)
+  piece_manquant       String?      @db.VarChar(75)
+  piece_endommagee     String?      @db.VarChar(75)
+  vehicule_id          Int          @unique(map: "vehicule_id")
+  annotation           String?      @db.VarChar(100)
+  date_suivi           DateTime     @default(now()) @db.DateTime(0)
+  lieu_id              Int?
+  utilisateur_id       Int?
+  lieu                 lieu?        @relation(fields: [lieu_id], references: [id], onUpdate: SetNull, map: "fk_fcav_lieu")
+  utilisateur          utilisateur? @relation(fields: [utilisateur_id], references: [id], onUpdate: SetNull, map: "fk_fcav_utilisateur")
+  vehicule             vehicule     @relation(fields: [vehicule_id], references: [id], onDelete: Cascade, map: "fk_fcav_vehicule")
+
+  @@index([lieu_id], map: "fk_fcav_lieu")
+  @@index([utilisateur_id], map: "fk_fcav_utilisateur")
+}
+
+model fst {
+  id              Int          @id @default(autoincrement())
+  num_dossier     String       @unique(map: "num_dossier") @db.VarChar(10)
+  colis_interieur String?      @db.VarChar(150)
+  etat_de_marche  String       @db.VarChar(50)
+  num_parking     Int          @unique(map: "num_parking")
+  annotation      String?      @db.VarChar(100)
+  date_suivi      DateTime     @default(now()) @db.DateTime(0)
+  vehicule_id     Int          @unique(map: "vehicule_id")
+  agent_id        Int?
+  utilisateur_id  Int?
+  lieu_id         Int?
+  parc_id         Int
+  agent           agent?       @relation(fields: [agent_id], references: [id], onUpdate: SetNull, map: "fk_fst_agent")
+  lieu            lieu?        @relation(fields: [lieu_id], references: [id], onUpdate: SetNull, map: "fk_fst_lieu")
+  parc            parc         @relation(fields: [parc_id], references: [id], onDelete: Cascade, map: "fk_fst_parc")
+  utilisateur     utilisateur? @relation(fields: [utilisateur_id], references: [id], onUpdate: SetNull, map: "fk_fst_utilisateur")
+  vehicule        vehicule     @relation(fields: [vehicule_id], references: [id], onDelete: Cascade, map: "fk_fst_vehicule")
+
+  @@index([agent_id], map: "fk_fst_agent")
+  @@index([lieu_id], map: "fk_fst_lieu")
+  @@index([parc_id], map: "fk_fst_parc")
+  @@index([utilisateur_id], map: "fk_fst_utilisateur")
+}
+
+model groupe_lieu {
+  id         Int    @id @default(autoincrement())
+  nom_groupe String @db.VarChar(50)
+  lieu       lieu[]
+}
+
+model lieu {
+  id             Int         @id @default(autoincrement())
+  code_lieu      String      @db.VarChar(10)
+  nom_lieu       String      @db.VarChar(75)
+  logo           String      @db.VarChar(20)
+  groupe_lieu_id Int
+  fcav           fcav[]
+  fst            fst[]
+  groupe_lieu    groupe_lieu @relation(fields: [groupe_lieu_id], references: [id], onDelete: Cascade, map: "fk_lieu_groupe_lieu")
+
+  @@index([groupe_lieu_id], map: "fk_lieu_groupe_lieu")
+}
+
+model parc {
+  id       Int    @id @default(autoincrement())
+  nom_parc String @db.VarChar(100)
+  fst      fst[]
+}
+
+model vehicule {
+  id             Int    @id @default(autoincrement())
+  num_chassi     String @unique(map: "num_chassi") @db.VarChar(20)
+  marque         String @db.VarChar(50)
+  modele         String @db.VarChar(50)
+  couleur        String @db.VarChar(20)
+  nombre_place   Int
+  etat_vehicule  String @db.VarChar(50)
+  genre_vehicule String @db.VarChar(50)
+  type_vehicule  String @db.VarChar(50)
+  navire_id      Int
+  fcav           fcav?
+  fst            fst?
+  navire         navire @relation(fields: [navire_id], references: [id], onDelete: Cascade, map: "fk_vehicule_navire")
+
+  @@index([navire_id], map: "fk_vehicule_navire")
+}
+
+model escale {
+  id                   Int       @id @default(autoincrement())
+  date_arrive_navire   DateTime  @db.Date
+  date_depart_navire   DateTime  @db.Date
+  date_debut_operation DateTime? @db.Date
+  date_fin_operation   DateTime? @db.Date
+  navire_id            Int
+  navire               navire    @relation(fields: [navire_id], references: [id], onDelete: Cascade, map: "fk_shift_navire")
+
+  @@index([navire_id], map: "fk_shift_navire")
+}

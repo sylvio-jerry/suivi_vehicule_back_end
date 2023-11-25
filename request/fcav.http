@@ -1,0 +1,43 @@
+###
+GET http://localhost:5000/api/fcav
+
+
+###
+GET http://localhost:5000/api/fcav/15
+
+
+###
+POST http://localhost:5000/api/fcav
+Content-Type: application/json
+
+{
+    "nombre_cle":3,
+    "km_compteur":1253,
+    "plaque_numeralogique":"plaquue u",
+    "annotation":"annotation",
+    "vehicule_id":3,
+    "piece_manquant":"piece_manquant",
+    "piece_endommagee":"piece_endommagee",
+    "lieu_id":2,
+    "utilisateur_id":3
+}
+
+###
+PUT http://localhost:5000/api/fcav/1
+Content-Type: application/json
+
+{
+    "nombre_cle":3,
+    "km_compteur":1253,
+    "plaque_numeralogique":"plaque zaza",
+    "annotation":"annotation",
+    "vehicule_id":5,
+    "piece_manquant":"piece_manquant u",
+    "piece_endommagee":"piece_endommagee u",
+    "lieu_id":2,
+    "utilisateur_id":3
+}
+
+
+###
+DELETE http://localhost:5000/api/fcav/18

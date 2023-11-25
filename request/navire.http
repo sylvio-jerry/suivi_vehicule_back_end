@@ -1,0 +1,33 @@
+###
+GET http://localhost:5000/api/navire
+
+
+###
+GET http://localhost:5000/api/navire/6
+
+
+###
+POST http://localhost:5000/api/navire
+Content-Type: application/json
+
+{
+    "nom_navire": "navire nay",
+    "compagnie_id":2,
+    "matricule":"1274",
+    "type_navire":"big bag"
+}
+
+###
+PUT http://localhost:5000/api/navire/3
+Content-Type: application/json
+
+
+{
+    "nom_navire": "navire uuu",
+    "compagnie_id":3,
+    "matricule":"1234",
+    "type_navire":"big bag"
+}
+
+###
+DELETE http://localhost:5000/api/navire/4

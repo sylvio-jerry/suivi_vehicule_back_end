@@ -1,0 +1,43 @@
+###
+GET http://localhost:5000/api/utilisateur
+
+
+###
+GET http://localhost:5000/api/utilisateur/1
+
+
+###
+POST http://localhost:5000/api/utilisateur
+Content-Type: application/json
+
+{
+    "email": "naba.sylvio@gmail.com",
+    "is_admin": false,
+    "agent_id": 1
+}
+
+###
+PUT http://localhost:5000/api/utilisateur/10
+Content-Type: application/json
+
+{
+    "email": "nabo.sylvio@gmail.com",
+    "is_admin": true,
+    "agent_id": 6
+}
+
+###
+DELETE http://localhost:5000/api/utilisateur/1
+
+
+
+###login
+POST http://localhost:5000/api/utilisateur/login
+Content-Type: application/json
+
+{
+    "email": "nabo.sylvio@gmail.com",
+    "password": "jVgoBCcf"
+}
+
+###forgot password

@@ -1,0 +1,46 @@
+###
+GET http://localhost:5000/api/fst
+
+
+###
+GET http://localhost:5000/api/fst/new_numero
+
+###
+GET http://localhost:5000/api/fst/13
+
+
+###
+POST http://localhost:5000/api/fst
+Content-Type: application/json
+
+{
+    "etat_de_marche":"mandeh",
+    "colis_interieur":"colis",
+    "num_parking":23,
+    "annotation":null,
+    "vehicule_id":5,
+    "agent_id":3,
+    "lieu_id":2,
+    "utilisateur_id":3,
+    "parc_id":1
+}
+
+###
+PUT http://localhost:5000/api/fst/14
+Content-Type: application/json
+
+
+{
+    "etat_de_marche":"etat u",
+    "colis_interieur":"colis u",
+    "num_parking":23,
+    "annotation":"u anno",
+    "vehicule_id":5,
+    "agent_id":6,
+    "lieu_id":4,
+    "utilisateur_id":7,
+    "parc_id":2
+}
+
+###
+DELETE http://localhost:5000/api/fst/13

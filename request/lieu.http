@@ -1,0 +1,33 @@
+###
+GET http://localhost:5000/api/lieu
+
+
+###
+GET http://localhost:5000/api/lieu/6
+
+
+###
+POST http://localhost:5000/api/lieu
+Content-Type: application/json
+
+{
+    "code_lieu":"127",
+    "nom_lieu": "lieu fafa",
+    "logo":"fa",
+    "groupe_lieu_id":2
+}
+
+###
+PUT http://localhost:5000/api/lieu/2
+Content-Type: application/json
+
+
+{
+    "code_lieu":"1288",
+    "nom_lieu": "lieu oioi",
+    "logo":"oi",
+    "groupe_lieu_id":3
+}
+
+###
+DELETE http://localhost:5000/api/lieu/1

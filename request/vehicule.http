@@ -1,0 +1,45 @@
+###
+GET http://localhost:5000/api/vehicule
+
+
+###
+GET http://localhost:5000/api/vehicule/6
+
+
+###
+POST http://localhost:5000/api/vehicule
+Content-Type: application/json
+
+{
+    "num_chassi":"130",
+    "marque": "marque fafa",
+    "modele":"fa",
+    "navire_id":3,
+    "couleur":"blue",
+    "nombre_place":18,
+    "etat_vehicule":"NEUVE",
+    "genre_vehicule":"za",
+    "type_vehicule":"MERZ"
+
+}
+
+###
+PUT http://localhost:5000/api/vehicule/1
+Content-Type: application/json
+
+
+{
+    "num_chassi":"127",
+    "marque": "marque fafa u",
+    "modele":"fa u",
+    "navire_id":3,
+    "couleur":"blue u",
+    "nombre_place":6,
+    "etat_vehicule":"OCCASION",
+    "genre_vehicule":"zaza",
+    "type_vehicule":"RAZ"
+
+}
+
+###
+DELETE http://localhost:5000/api/vehicule/1
