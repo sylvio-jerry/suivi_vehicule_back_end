@@ -2,6 +2,7 @@ const { PrismaClient, prisma } = require("@prisma/client");
 
 const { escale } = new PrismaClient();
 const { sendError, sendResponse } = require("./baseController");
+const moment = require("moment");
 
 //AJOUT
 exports.create = async (req, res, next) => {
@@ -16,8 +17,12 @@ exports.create = async (req, res, next) => {
 
   date_arrive_navire = new Date(date_arrive_navire);
   date_depart_navire = new Date(date_depart_navire);
-  date_debut_operation = new Date(date_debut_operation);
-  date_fin_operation = new Date(date_fin_operation);
+  date_debut_operation = date_debut_operation
+    ? new Date(date_debut_operation)
+    : date_debut_operation;
+  date_fin_operation = date_fin_operation
+    ? new Date(date_fin_operation)
+    : date_fin_operation;
 
   try {
     const escale_ = await escale.create({
@@ -40,7 +45,14 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const escale_ = await escale.findMany();
+    const escale_ = await escale.findMany({
+      orderBy: {
+        date_arrive_navire: "desc",
+      },
+      include: {
+        navire: true,
+      },
+    });
     console.log(escale_);
     sendResponse(res, escale_, "Liste des escale");
   } catch (error) {
@@ -72,13 +84,17 @@ exports.update = async (req, res, next) => {
     date_depart_navire,
     date_debut_operation,
     date_fin_operation,
-    navire_id
+    navire_id,
   } = req.body;
 
   date_arrive_navire = new Date(date_arrive_navire);
   date_depart_navire = new Date(date_depart_navire);
-  date_debut_operation = new Date(date_debut_operation);
-  date_fin_operation = new Date(date_fin_operation);
+  date_debut_operation = date_debut_operation
+    ? new Date(date_debut_operation)
+    : date_debut_operation;
+  date_fin_operation = date_fin_operation
+    ? new Date(date_fin_operation)
+    : date_fin_operation;
 
   try {
     const escale_ = await escale.update({
@@ -90,7 +106,7 @@ exports.update = async (req, res, next) => {
         date_depart_navire,
         date_debut_operation,
         date_fin_operation,
-        navire_id
+        navire_id,
       },
     });
     console.log(escale_);

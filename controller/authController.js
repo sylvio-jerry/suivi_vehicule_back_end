@@ -11,7 +11,11 @@ const { send_mail } = require("../tools/send_mail");
 module.exports = {
   getAll: async (req, res, next) => {
     try {
-      const all_utilisateur = await utilisateur.findMany();
+      const all_utilisateur = await utilisateur.findMany({
+        include:{
+          agent:true
+        }
+      });
       sendResponse(res, all_utilisateur, "Liste des utilisateurs");
     } catch (error) {
       console.log("erorrrrrrrr", error);
@@ -23,6 +27,9 @@ module.exports = {
       const { id } = req.params;
       const utilisateur_ = await utilisateur.findFirst({
         where: { id: +id },
+        include:{
+          agent:true
+        }
       });
 
       sendResponse(res, utilisateur_, "Information utilisateur");
@@ -135,9 +142,10 @@ module.exports = {
     else {
       // Check if the pseudo exists
       const user = await utilisateur.findUnique({
-        where: { email },
+        where: { email }
       });
 
+      console.log("io izy",user);
       if (!user) sendError(res, "Veuillez créer un compte pour vous connecter");
       else {
         // Check if the password correct

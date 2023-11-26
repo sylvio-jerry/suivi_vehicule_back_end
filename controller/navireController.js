@@ -29,7 +29,11 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const navire_ = await navire.findMany();
+    const navire_ = await navire.findMany({
+      include:{
+        compagnie:true
+      }
+    });
     console.log(navire_);
     sendResponse(res, navire_, "Liste des navires");
   } catch (error) {

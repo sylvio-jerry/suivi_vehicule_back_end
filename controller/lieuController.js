@@ -29,7 +29,11 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const lieu_ = await lieu.findMany();
+    const lieu_ = await lieu.findMany({
+      include:{
+        groupe_lieu:true
+      }
+    });
     console.log(lieu_);
     sendResponse(res, lieu_, "Liste des lieu");
   } catch (error) {

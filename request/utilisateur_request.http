@@ -3,7 +3,7 @@ GET http://localhost:5000/api/utilisateur
 
 
 ###
-GET http://localhost:5000/api/utilisateur/1
+GET http://localhost:5000/api/utilisateur/3
 
 
 ###
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 {
     "email": "nabo.sylvio@gmail.com",
-    "password": "jVgoBCcf"
+    "password": "qweI4Pg2"
 }
 
 ###forgot password

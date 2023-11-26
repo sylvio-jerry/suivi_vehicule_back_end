@@ -11,24 +11,24 @@ POST http://localhost:5000/api/escale
 Content-Type: application/json
 
 {
-    "date_arrive_navire": "2022-02-13",
-    "date_depart_navire": "2023-02-13",
-    "date_debut_operation": "2024-02-13",
-    "date_fin_operation": "2025-02-13",
-    "navire_id": 1
+    "date_arrive_navire": "2023-11-25",
+    "date_depart_navire": "2023-11-27",
+    "date_debut_operation": "2023-11-28",
+    "date_fin_operation": "2023-11-28",
+    "navire_id": 5
 }
 
 ###
-PUT http://localhost:5000/api/escale/2
+PUT http://localhost:5000/api/escale/8
 Content-Type: application/json
 
 
 {
-    "date_arrive_navire": "2020-02-10",
-    "date_depart_navire": "2020-02-10",
-    "date_debut_operation": "2020-02-10",
-    "date_fin_operation": "2020-02-10",
-    "navire_id": 3
+    "date_arrive_navire": "2030-01-10",
+    "date_depart_navire": "2030-05-18",
+    "date_debut_operation": null,
+    "date_fin_operation": null,
+    "navire_id": 5
 }
 
 ###
