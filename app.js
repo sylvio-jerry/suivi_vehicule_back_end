@@ -9,8 +9,6 @@ require('dotenv').config();
 
 const { setDefaultResultOrder } = require("dns");
 
-
-
 var app = express();
 
 // view engine setup
@@ -36,6 +34,7 @@ app.use("/api/fst", require("./routes/fst.route"));
 app.use("/api/fcav", require("./routes/fcav.route"));
 app.use("/api/escale", require("./routes/escale.route"));
 app.use("/api/utilisateur", require("./routes/utilisateur.route"));
+app.use("/api/review", require("./routes/review.route"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

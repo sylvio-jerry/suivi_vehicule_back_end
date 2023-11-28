@@ -53,9 +53,61 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const fst_ = await fst.findMany();
+    let fst_ = await fst.findMany({
+      include:{
+        vehicule:{
+          include:{
+            fcav:{
+              include:{
+                lieu:{
+                  include:{
+                    groupe_lieu:true
+                  }
+                },
+                utilisateur:{
+                  include:{
+                    agent:true
+                  }
+                }
+              }
+            },
+            escale:{
+              include:{
+                navire:{
+                  include:{
+                    compagnie:true
+                  }
+                }
+              }
+            }
+          }
+        },
+        parc:true,
+        agent:true,
+        lieu:{
+          include:{
+            groupe_lieu:true
+          }
+        },
+        utilisateur:{
+          include:{
+            agent:true
+          }
+        }
+      }
+    });
     console.log(fst_);
-    sendResponse(res, fst_, "Liste des fsts");
+    if(fst_){
+      fst_ = fst_.map((fst__) => {
+        const { etat_de_marche,...rest } = fst__;
+    
+        return {
+          ...rest,
+          etat_de_marche: { etat: etat_de_marche }
+        };
+      });
+    }
+    sendResponse(res, fst_, "Liste des fst");
   } catch (error) {
     console.log(error);
     sendError(res);

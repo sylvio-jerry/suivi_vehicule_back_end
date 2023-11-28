@@ -10,7 +10,7 @@ exports.create = async (req, res, next) => {
     num_chassi,
     marque,
     modele,
-    navire_id,
+    escale_id,
     couleur,
     nombre_place,
     etat_vehicule,
@@ -23,7 +23,7 @@ exports.create = async (req, res, next) => {
         num_chassi,
         marque,
         modele,
-        navire_id,
+        escale_id,
         couleur,
         nombre_place,
         etat_vehicule,
@@ -44,8 +44,68 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const vehicule_ = await vehicule.findMany();
+    let vehicule_ = await vehicule.findMany({
+      orderBy: {
+        escale: {
+          date_arrive_navire: "desc",
+        },
+      },
+      include: {
+        escale: {
+          include: {
+            navire: {
+              include:{
+                compagnie:true
+              }
+            },
+          },
+        },
+        fst: {
+          include: {
+            parc: true,
+            agent: true,
+            lieu: {
+              include: {
+                groupe_lieu: true,
+              },
+            },
+            utilisateur: {
+              include: {
+                agent: true,
+              },
+            },
+          },
+        },
+        fcav: {
+          include: {
+            lieu: {
+              include: {
+                groupe_lieu: true,
+              },
+            },
+            utilisateur: {
+              include: {
+                agent: true,
+              },
+            },
+          },
+        },
+      },
+    });
     console.log(vehicule_);
+    if (vehicule_) {
+      vehicule_ = vehicule_.map((vehicule__) => {
+        const { genre_vehicule, etat_vehicule, type_vehicule, ...rest } =
+          vehicule__;
+
+        return {
+          ...rest,
+          genre_vehicule: { genre: genre_vehicule },
+          etat_vehicule: { etat: etat_vehicule },
+          type_vehicule: { type: type_vehicule },
+        };
+      });
+    }
     sendResponse(res, vehicule_, "Liste des vehicule");
   } catch (error) {
     console.log(error);
@@ -75,7 +135,7 @@ exports.update = async (req, res, next) => {
     num_chassi,
     marque,
     modele,
-    navire_id,
+    escale_id,
     couleur,
     nombre_place,
     etat_vehicule,
@@ -91,7 +151,7 @@ exports.update = async (req, res, next) => {
         num_chassi,
         marque,
         modele,
-        navire_id,
+        escale_id,
         couleur,
         nombre_place,
         etat_vehicule,

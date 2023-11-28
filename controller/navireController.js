@@ -29,12 +29,22 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const navire_ = await navire.findMany({
+    let navire_ = await navire.findMany({
       include:{
         compagnie:true
       }
     });
     console.log(navire_);
+    if(navire_){
+      navire_ = navire_.map((navire__) => {
+        const { type_navire, ...rest } = navire__;
+    
+        return {
+          ...rest,
+          type_navire: { type: type_navire }
+        };
+      });
+    }
     sendResponse(res, navire_, "Liste des navires");
   } catch (error) {
     console.log(error);

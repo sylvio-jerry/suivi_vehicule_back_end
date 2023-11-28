@@ -51,6 +51,7 @@ exports.findAll = async (req, res, next) => {
       },
       include: {
         navire: true,
+        vehicule:true
       },
     });
     console.log(escale_);

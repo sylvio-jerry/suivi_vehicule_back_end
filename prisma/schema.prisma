@@ -19,14 +19,13 @@ model utilisateur {
 }
 
 model navire {
-  id           Int        @id @default(autoincrement())
-  matricule    String     @unique(map: "matricule") @db.VarChar(10)
-  nom_navire   String     @db.VarChar(75)
-  type_navire  String     @db.VarChar(50)
+  id           Int       @id @default(autoincrement())
+  matricule    String    @unique(map: "matricule") @db.VarChar(10)
+  nom_navire   String    @db.VarChar(75)
+  type_navire  String    @db.VarChar(50)
   compagnie_id Int
   escale       escale[]
-  compagnie    compagnie  @relation(fields: [compagnie_id], references: [id], onDelete: Cascade, map: "fk_navire_compagnie")
-  vehicule     vehicule[]
+  compagnie    compagnie @relation(fields: [compagnie_id], references: [id], onDelete: Cascade, map: "fk_navire_compagnie")
 
   @@index([compagnie_id], map: "fk_navire_compagnie")
 }
@@ -74,7 +73,7 @@ model fst {
   num_dossier     String       @unique(map: "num_dossier") @db.VarChar(10)
   colis_interieur String?      @db.VarChar(150)
   etat_de_marche  String       @db.VarChar(50)
-  num_parking     Int          @unique(map: "num_parking")
+  num_parking     Int
   annotation      String?      @db.VarChar(100)
   date_suivi      DateTime     @default(now()) @db.DateTime(0)
   vehicule_id     Int          @unique(map: "vehicule_id")
@@ -129,22 +128,23 @@ model vehicule {
   etat_vehicule  String @db.VarChar(50)
   genre_vehicule String @db.VarChar(50)
   type_vehicule  String @db.VarChar(50)
-  navire_id      Int
+  escale_id      Int
   fcav           fcav?
   fst            fst?
-  navire         navire @relation(fields: [navire_id], references: [id], onDelete: Cascade, map: "fk_vehicule_navire")
+  escale         escale @relation(fields: [escale_id], references: [id], onDelete: Cascade, map: "fk_vehicule_escale")
 
-  @@index([navire_id], map: "fk_vehicule_navire")
+  @@index([escale_id], map: "fk_vehicule_escale")
 }
 
 model escale {
-  id                   Int       @id @default(autoincrement())
-  date_arrive_navire   DateTime  @db.Date
-  date_depart_navire   DateTime  @db.Date
-  date_debut_operation DateTime? @db.Date
-  date_fin_operation   DateTime? @db.Date
+  id                   Int        @id @default(autoincrement())
+  date_arrive_navire   DateTime   @db.Date
+  date_depart_navire   DateTime   @db.Date
+  date_debut_operation DateTime?  @db.Date
+  date_fin_operation   DateTime?  @db.Date
   navire_id            Int
-  navire               navire    @relation(fields: [navire_id], references: [id], onDelete: Cascade, map: "fk_shift_navire")
+  navire               navire     @relation(fields: [navire_id], references: [id], onDelete: Cascade, map: "fk_shift_navire")
+  vehicule             vehicule[]
 
   @@index([navire_id], map: "fk_shift_navire")
 }

@@ -11,10 +11,10 @@ POST http://localhost:5000/api/vehicule
 Content-Type: application/json
 
 {
-    "num_chassi":"130",
+    "num_chassi":"1250",
     "marque": "marque fafa",
     "modele":"fa",
-    "navire_id":3,
+    "escale_id":5,
     "couleur":"blue",
     "nombre_place":18,
     "etat_vehicule":"NEUVE",

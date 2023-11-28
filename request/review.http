@@ -3,12 +3,12 @@ GET http://localhost:5000/api/review
 
 
 ###
-POST http://localhost:5000/api/review/shift_between_2_date
+POST http://localhost:5000/api/review
 Content-Type: application/json
 
 {
-    "date_debut": "2022-11-07",
-    "date_fin": "2023-11-09"
+    "date_debut": "2022-01-10",
+    "date_fin": "2022-01-10"
 }
 
 ###

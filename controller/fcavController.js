@@ -51,7 +51,34 @@ exports.create = async (req, res, next) => {
 //FINDALL
 exports.findAll = async (req, res, next) => {
   try {
-    const fcav_ = await fcav.findMany();
+    const fcav_ = await fcav.findMany({
+      include:{
+        vehicule:{
+          include:{
+            fst:true,
+            escale:{
+              include:{
+                navire:{
+                  include:{
+                    compagnie:true
+                  }
+                }
+              }
+            }
+          }
+        },
+        lieu:{
+          include:{
+            groupe_lieu:true
+          }
+        },
+        utilisateur:{
+          include:{
+            agent:true
+          }
+        }
+      }
+    });
     console.log(fcav_);
     sendResponse(res, fcav_, "Liste des fcavs");
   } catch (error) {
