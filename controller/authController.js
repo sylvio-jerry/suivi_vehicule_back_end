@@ -142,17 +142,18 @@ module.exports = {
     else {
       // Check if the pseudo exists
       const user = await utilisateur.findUnique({
-        where: { email }
+        where: { email },
+        include:{
+          agent:true
+        }
       });
-
-      console.log("io izy",user);
       if (!user) sendError(res, "Veuillez créer un compte pour vous connecter");
       else {
         // Check if the password correct
         bcrypt.compare(password, user.password, async (err, result) => {
           if (err) sendError(res, new Error(err));
           else if (result) {
-            sendResponse(res, user, `Bienvenue ${user.email} !`);
+            sendResponse(res, user, `Bienvenue ${user.agent.nom} ${user.agent.prenom ? user.agent.prenom : '' } !`);
           } else {
             sendError(res, "Mot de passe invalide");
           }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 25 nov. 2023 à 04:45
+-- Généré le : mer. 29 nov. 2023 à 06:25
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.25
 
@@ -42,11 +42,12 @@ CREATE TABLE `agent` (
 --
 
 INSERT INTO `agent` (`id`, `matricule`, `nom`, `prenom`, `tel`, `adresse`, `role`) VALUES
-(1, '1234567891', 'agent_4', NULL, NULL, 'ddzdz', 'chauffeur'),
-(3, '6985', 'agent_4', NULL, NULL, 'ddzdz', 'chauffeur'),
-(4, 'zaza42', 'agent_42', 'yes', '0348596582', 'ddzdz', 'driver expertise'),
-(5, '9999', 'agent_4', NULL, NULL, 'ddzdz', 'chauffeur'),
-(6, '1252', 'agent_4', NULL, NULL, 'ddzdz', 'chauffeur');
+(1, '123456', 'agent_4', NULL, NULL, 'ddzdz', 'Chauffeur'),
+(4, '123587', 'agent_42', 'yes', '0348596582', 'ddzdz', 'Driver expertise'),
+(5, '999985', 'agent_4', NULL, NULL, 'ddzdz', 'Driver expertise'),
+(6, '125289', 'agent_4', NULL, NULL, 'ddzdz', 'Chauffeur'),
+(8, '125547', 'scofild', 'jerry ji', NULL, 'Andranomadio', 'Driver expertise'),
+(10, '655004', 'juju', 'sylvio', NULL, 'Andranomadio', 'Chauffeur');
 
 -- --------------------------------------------------------
 
@@ -65,8 +66,8 @@ CREATE TABLE `compagnie` (
 
 INSERT INTO `compagnie` (`id`, `nom_compagnie`) VALUES
 (1, 'EUROPA'),
-(2, 'EUROPA2'),
-(3, 'EUROPA3');
+(2, 'CHAN'),
+(3, 'COMPA');
 
 -- --------------------------------------------------------
 
@@ -88,8 +89,12 @@ CREATE TABLE `escale` (
 --
 
 INSERT INTO `escale` (`id`, `date_arrive_navire`, `date_depart_navire`, `date_debut_operation`, `date_fin_operation`, `navire_id`) VALUES
-(1, '2022-02-13', '2023-02-13', '2024-02-13', '2025-02-13', 3),
-(2, '2020-02-10', '2020-02-10', '2020-02-10', '2020-02-10', 3);
+(4, '2020-11-26', '2023-02-13', '2024-02-13', '2025-02-13', 1),
+(5, '2023-01-10', '2023-05-18', '2023-03-27', '2023-04-06', 5),
+(6, '2020-11-10', '2023-12-11', NULL, '2023-12-02', 6),
+(8, '2030-01-10', '2030-05-18', NULL, NULL, 5),
+(10, '2020-01-07', '2001-12-07', '2023-11-26', NULL, 6),
+(11, '2023-11-28', '2023-12-30', NULL, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -116,8 +121,7 @@ CREATE TABLE `fcav` (
 --
 
 INSERT INTO `fcav` (`id`, `nombre_cle`, `km_compteur`, `plaque_numeralogique`, `piece_manquant`, `piece_endommagee`, `vehicule_id`, `annotation`, `date_suivi`, `lieu_id`, `utilisateur_id`) VALUES
-(1, 3, 1253, 'plaque zaza', 'piece_manquant u', 'piece_endommagee u', 5, 'annotation', '2023-11-25 05:26:31', 2, 3),
-(15, 3, 1253, 'plaque u', 'piece_manquant', 'piece_endommagee', 6, 'annotation', '2023-11-25 05:30:06', 2, 3);
+(25, 4, 50, 'azazaz', '', '', 7, '', '2023-11-28 08:33:44', 3, 14);
 
 -- --------------------------------------------------------
 
@@ -145,8 +149,8 @@ CREATE TABLE `fst` (
 --
 
 INSERT INTO `fst` (`id`, `num_dossier`, `colis_interieur`, `etat_de_marche`, `num_parking`, `annotation`, `date_suivi`, `vehicule_id`, `agent_id`, `utilisateur_id`, `lieu_id`, `parc_id`) VALUES
-(1, 'FST-0001', 'colis', 'etat', 20, 'anno', '2023-11-25 01:56:13', 3, 3, 3, 2, 1),
-(14, 'FST-0014', 'colis u', 'etat u', 23, 'u anno', '2023-11-25 05:08:21', 5, 6, 7, 4, 2);
+(16, 'FST-0001', 'colis', 'Oui', 23, NULL, '2023-11-27 10:41:05', 7, 1, 14, 2, 1),
+(18, 'FST-0017', 'colis', 'Non, amorçage', 30, '', '2023-11-28 08:32:43', 8, 1, 14, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +193,8 @@ CREATE TABLE `lieu` (
 INSERT INTO `lieu` (`id`, `code_lieu`, `nom_lieu`, `logo`, `groupe_lieu_id`) VALUES
 (2, '1288', 'lieu oioi', 'oi', 3),
 (3, '126', 'lieu ah', 'ro', 1),
-(4, '127', 'lieu fafa', 'fa', 2);
+(4, '127 u', 'lieu fafau', 'faau', 3),
+(6, 'cdd', 'dc', 'dcd', 2);
 
 -- --------------------------------------------------------
 
@@ -210,8 +215,10 @@ CREATE TABLE `navire` (
 --
 
 INSERT INTO `navire` (`id`, `matricule`, `nom_navire`, `type_navire`, `compagnie_id`) VALUES
-(1, '12345', 'navire vaovao', 'RORO', 1),
-(3, '1234', 'navire uuu', 'big bag', 3);
+(1, '96AO50B', 'vaovao', 'RORO', 3),
+(5, '52AO50A', 'zara', 'RORO', 1),
+(6, '77AO51C', 'john navi', 'LOLO', 2),
+(8, '36AT50D', 'charles', 'LOLO', 1);
 
 -- --------------------------------------------------------
 
@@ -229,8 +236,9 @@ CREATE TABLE `parc` (
 --
 
 INSERT INTO `parc` (`id`, `nom_parc`) VALUES
-(1, 'parck'),
-(2, 'parck 1');
+(1, 'Maroahitra'),
+(2, 'Tanambao'),
+(6, 'Tanamakoa');
 
 -- --------------------------------------------------------
 
@@ -251,10 +259,9 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `email`, `password`, `is_admin`, `agent_id`) VALUES
-(1, 'nabo.sylvio@gmail.com', '$2a$10$QFTKtxk3fana5ntQVtw8OOCgMkwl7Sx88NY2gLM8j52vsI464YDs2', 1, 6),
-(3, 'naboo.sylvio@gmail.com', '$2a$10$IeF2k3oy46/n46Zt3iVfXe29xdew3B8s64lStK9OZuMRRz28xfFP2', 0, 3),
-(7, 'naboi.sylvio@gmail.com', '$2a$10$Ory3WIKBObXP6uBh/5CUzOSfa3pY7Isqi6/ZKZoBS7WrxPN3FTNQa', 1, 4),
-(10, 'nabozaza.sylvio@gmail.com', '$2a$10$iY.S6mWqdmwmfrtZsMQ/ie34icN9P7nYr1cmAWeIhFikFexpyXUyO', 0, 1);
+(7, 'naboi.sylvio@gmail.com', '$2a$10$o690nSN7EyswkrQZ2iCMq.uZgf2Ow3dkZFftmxDJRLyNNYqBEehMi', 0, 5),
+(10, 'naboreal.sylvio@gmail.com', '$2a$10$OFCKObYCsvu/Yc3Cb48sh.Y9qRpgJ9MMh8mdMvxxeE5SIotsxK1x2', 1, 4),
+(14, 'nabo.sylvio@gmail.com', '$2a$10$1ADux/ALOOOC1Tx4i71zIeuFMv0Gj4gNuTsviABQX.mpSSyH.iHQq', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -272,17 +279,17 @@ CREATE TABLE `vehicule` (
   `etat_vehicule` varchar(50) NOT NULL,
   `genre_vehicule` varchar(50) NOT NULL,
   `type_vehicule` varchar(50) NOT NULL,
-  `navire_id` int(11) NOT NULL
+  `escale_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `vehicule`
 --
 
-INSERT INTO `vehicule` (`id`, `num_chassi`, `marque`, `modele`, `couleur`, `nombre_place`, `etat_vehicule`, `genre_vehicule`, `type_vehicule`, `navire_id`) VALUES
-(3, '128', 'marque fafa', 'fa', 'blue', 18, 'NEUVE', 'za', 'MERZ', 1),
-(5, '129', 'marque fafa', 'fa', 'blue', 18, 'NEUVE', 'za', 'MERZ', 1),
-(6, '130', 'marque fafa', 'fa', 'blue', 18, 'NEUVE', 'za', 'MERZ', 3);
+INSERT INTO `vehicule` (`id`, `num_chassi`, `marque`, `modele`, `couleur`, `nombre_place`, `etat_vehicule`, `genre_vehicule`, `type_vehicule`, `escale_id`) VALUES
+(7, '130', 'marque fafa', 'fa', 'blue', 18, 'NEUVE', 'za', 'A CHENILLE', 5),
+(8, '12345645678912345', 'zeze', 'mod', 'rouge', 6, 'OCCASION', 'MTL', 'PNEUMATIQUE', 6),
+(10, '1250', 'marque fafa', 'fa', 'blue', 18, 'NEUVE', 'za', 'A CHENILLE', 5);
 
 --
 -- Index pour les tables déchargées
@@ -323,7 +330,6 @@ ALTER TABLE `fcav`
 --
 ALTER TABLE `fst`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `num_parking` (`num_parking`),
   ADD UNIQUE KEY `num_dossier` (`num_dossier`),
   ADD UNIQUE KEY `vehicule_id` (`vehicule_id`),
   ADD KEY `fk_fst_parc` (`parc_id`),
@@ -372,7 +378,7 @@ ALTER TABLE `utilisateur`
 ALTER TABLE `vehicule`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `num_chassi` (`num_chassi`),
-  ADD KEY `fk_vehicule_navire` (`navire_id`);
+  ADD KEY `fk_vehicule_escale` (`escale_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -382,67 +388,67 @@ ALTER TABLE `vehicule`
 -- AUTO_INCREMENT pour la table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `compagnie`
 --
 ALTER TABLE `compagnie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `escale`
 --
 ALTER TABLE `escale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `fcav`
 --
 ALTER TABLE `fcav`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pour la table `fst`
 --
 ALTER TABLE `fst`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `groupe_lieu`
 --
 ALTER TABLE `groupe_lieu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `lieu`
 --
 ALTER TABLE `lieu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `navire`
 --
 ALTER TABLE `navire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `parc`
 --
 ALTER TABLE `parc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
@@ -494,7 +500,7 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  ADD CONSTRAINT `fk_vehicule_navire` FOREIGN KEY (`navire_id`) REFERENCES `navire` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_vehicule_escale` FOREIGN KEY (`escale_id`) REFERENCES `escale` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
