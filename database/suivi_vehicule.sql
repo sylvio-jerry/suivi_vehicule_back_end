@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 29 nov. 2023 à 16:43
+-- Généré le : jeu. 30 nov. 2023 à 21:50
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.25
 
@@ -43,9 +43,10 @@ CREATE TABLE `agent` (
 
 INSERT INTO `agent` (`id`, `matricule`, `nom`, `prenom`, `tel`, `adresse`, `role`) VALUES
 (6, 'IM-2463', 'Gerald', NULL, '0349442518', 'Tana', 'Chauffeur'),
-(8, 'IM-2470', 'scofild', 'jerry', NULL, 'Andranomadio', 'Driver expertise'),
+(8, 'IM-2470', 'scofild', 'jerry', NULL, 'Andranomadio', 'Agent expertise'),
 (10, 'IM-2480', 'ju', 'sylvio', NULL, 'Andranomadio', 'Chauffeur'),
-(12, 'IM-1236', 'Zayn', 'Malik', '0349442509', 'Paris', 'Driver expertise');
+(12, 'IM-1236', 'Zayn', 'Malik', '0349442509', 'Paris', 'Agent expertise'),
+(13, '452666', 'jerry', 'sylvio', NULL, 'Andranomadio', 'Chauffeur');
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,8 @@ CREATE TABLE `fst` (
 --
 
 INSERT INTO `fst` (`id`, `num_dossier`, `colis_interieur`, `etat_de_marche`, `num_parking`, `annotation`, `date_suivi`, `vehicule_id`, `agent_id`, `utilisateur_id`, `lieu_id`, `parc_id`) VALUES
-(24, 'FST-0001', 'casque', 'Oui', 65, NULL, '2023-11-29 18:41:10', 11, 6, 14, 10, 1);
+(24, 'FST-0001', 'casque', 'Oui', 65, NULL, '2023-11-29 18:41:10', 11, 6, 14, 10, 1),
+(25, 'FST-0025', NULL, 'Non, amorçage', 50, NULL, '2023-11-30 23:23:22', 17, 6, 14, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -383,7 +385,7 @@ ALTER TABLE `vehicule`
 -- AUTO_INCREMENT pour la table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `compagnie`
@@ -407,7 +409,7 @@ ALTER TABLE `fcav`
 -- AUTO_INCREMENT pour la table `fst`
 --
 ALTER TABLE `fst`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pour la table `groupe_lieu`

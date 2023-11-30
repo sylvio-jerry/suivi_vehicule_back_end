@@ -15,7 +15,7 @@ exports.getReview = async (req, res, next) => {
   try {
     const navire_ = await getNavireCount();
     const chauffeur = await getAgentCount("Chauffeur");
-    const driver_expertise_ = await getAgentCount("Driver expertise");
+    const driver_expertise_ = await getAgentCount("Agent expertise");
     const all_vehicule_ = await getVehicule(date_debut,date_fin);
     let vehicule_with_fst = 0;
     let vehicule_with_fcav = 0;
